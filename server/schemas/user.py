@@ -10,6 +10,7 @@ class UserCreate(BaseModel):
 # 用于返回给用户的模型，不返回密码
 class UserOut(BaseModel):
     username: str
+    role: str
 
     class Config:
         orm_mode = True
