@@ -23,6 +23,8 @@
 <script setup>
 import {ref} from 'vue'
 import axios from 'axios';
+// 使用路由
+import {useRouter} from 'vue-router';
 
 const loginForm = ref({
   username: '',

@@ -1,12 +1,9 @@
 from fastapi import FastAPI
 
-from .db.database import engine, Base, database
+from .db.database import database
 from .routes import user as user_routes
 
 app = FastAPI()
-
-# 创建数据库表
-Base.metadata.create_all(bind=engine)
 
 
 @app.on_event("startup")
