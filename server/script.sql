@@ -7,4 +7,8 @@ create table Users
     hashed_password varchar(100) null comment '密码（哈希后）'
 ) comment '用于保存用户信息';
 
-
+-- 请在此处修改管理员的用户名和密码
+USE
+RealDoctorMonitor;
+INSERT INTO Users (username, email, role, hashed_password)
+VALUES ('admin', 'chenqiyuan1012@foxmail.com', 'admin', '$2b$12$0SDRx5mw1RbGgholvXjWIes/keD8PqaHNo.fa0W2mACwuznGNNHKW');
