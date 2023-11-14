@@ -2,7 +2,7 @@
   <el-container class="login-container">
     <el-card class="box-card">
       <el-header class="login-text">登录</el-header>
-      <el-form :model="loginForm" :rules="loginRules" ref="loginFormRef">
+      <el-form :model="loginForm" :rules="rules" ref="loginFormRef">
         <el-form-item label="用户名" prop="username" label-position="right" label-width="100px">
           <el-input v-model="loginForm.username" autocomplete="off" style="width: 80%"/>
         </el-form-item>
@@ -24,7 +24,6 @@
 import {ref} from 'vue'
 import axios from 'axios';
 // 使用路由
-import {useRouter} from 'vue-router';
 
 const loginForm = ref({
   username: '',
