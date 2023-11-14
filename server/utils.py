@@ -13,4 +13,4 @@ def get_password_hash(password):
 
 if __name__ == "__main__":
     # 用于管理员密码生成
-    print(get_password_hash("xxx"))
+    print(get_password_hash("HelloWorld2023"))

@@ -4,8 +4,8 @@ from sqlalchemy.orm import Session
 
 from ..db.database import SessionLocal
 from ..db.models import User
-from ..schemas.user import UserCreate, UserOut
-from ..utils import verify_password
+from ..schemas.user import UserCreate, UserOut, UserLogin
+from ..utils import verify_password, get_password_hash
 
 router = APIRouter()
 
@@ -20,10 +20,27 @@ def get_db():
 
 
 @router.post("/login", response_model=UserOut)
-async def login(user: UserCreate, db: Session = Depends(get_db)):
+async def login(user: UserLogin, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.username == user.username).first()
     if not db_user:
         raise HTTPException(status_code=400, detail="Incorrect username or password")
     if not verify_password(user.password, db_user.hashed_password):
         raise HTTPException(status_code=400, detail="Incorrect username or password")
+    return db_user
+
+
+@router.post("/register", response_model=UserOut)
+async def register(user: UserCreate, db: Session = Depends(get_db)):
+    db_user = db.query(User).filter(User.username == user.username).first()
+    if db_user:
+        raise HTTPException(status_code=400, detail="User already exists")
+    hashed_password = get_password_hash(user.password)
+    db_user = User()
+    db_user.username = user.username
+    db_user.email = user.email
+    db_user.hashed_password = hashed_password
+    db_user.role = "user"
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
     return db_user
