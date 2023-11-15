@@ -13,7 +13,7 @@
           <el-input type="password" v-model="registerForm.password" autocomplete="off" style="width: 80%"/>
         </el-form-item>
         <el-form-item class="bottom-group">
-          <el-button type="success" @click="handleLogin" style="width: 100px">注册</el-button>
+          <el-button type="success" @click="handleRegister" style="width: 100px">注册</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -63,20 +63,18 @@ const handleRegister = () => {
   registerFormRef.value.validate(async (valid) => {
     if (valid) {
       try {
-        const response = await axios.post('http://localhost/login', registerForm.value);
+        const response = await axios.post('http://localhost/register', registerForm.value);
         const {status, message} = response.data;
         // 根据状态做出相应的处理
         if (status === 'error') {
-          alert('登录失败：' + message);
+          alert('注册失败：' + message);
         } else if (status === 'success') {
           alert('登录成功：' + message);
-        } else if (status === 'first_time') {
-          alert('初次登录：' + message);
         }
       } catch (error) {
         // 处理请求失败的情况
-        console.error('登录请求失败：', error);
-        alert('登录请求失败，请检查网络连接！');
+        console.error('注册请求失败：', error);
+        alert('注册请求失败，请检查网络连接！');
       }
     } else {
       alert('请填写正确的信息！');
