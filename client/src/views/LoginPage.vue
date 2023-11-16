@@ -23,6 +23,7 @@
 <script setup>
 import {ref} from 'vue'
 import axios from 'axios';
+import router from "../router";
 // 使用路由
 
 const loginForm = ref({
@@ -36,15 +37,15 @@ const validatePassword = (rule, value, callback) => {
   if (!value) {
     return callback(new Error('请输入密码'));
   }
-  if (value.length < 6) {
-    return callback(new Error('密码长度不能少于6位'));
-  }
-  if (!/[A-Za-z]/.test(value)) {
-    return callback(new Error('密码必须包含英文字符'));
-  }
-  if (!/\d/.test(value)) {
-    return callback(new Error('密码必须包含数字'));
-  }
+  // if (value.length < 6) {
+  //   return callback(new Error('密码长度不能少于6位'));
+  // }
+  // if (!/[A-Za-z]/.test(value)) {
+  //   return callback(new Error('密码必须包含英文字符'));
+  // }
+  // if (!/\d/.test(value)) {
+  //   return callback(new Error('密码必须包含数字'));
+  // }
   callback();
 };
 
@@ -62,23 +63,37 @@ const handleLogin = () => {
   loginFormRef.value.validate(async (valid) => {
     if (valid) {
       try {
-        const response = await axios.post('http://localhost/login', loginForm.value);
-        const {status, message} = response.data;
-        // 根据状态做出相应的处理
-        if (status === 'error') {
-          alert('登录失败：' + message);
-        } else if (status === 'success') {
-          alert('登录成功：' + message);
-        } else if (status === 'first_time') {
-          alert('初次登录：' + message);
+        const response = await axios.post('http://127.0.0.1:8000/login', loginForm.value);
+        console.log(response)
+        if (response.status === 200) {
+          alert("hello!")
+          // router.push('/home');
         }
       } catch (error) {
-        // 处理请求失败的情况
-        console.error('登录请求失败：', error);
-        alert('登录请求失败，请检查网络连接！');
+        if (error.response) {
+          // 请求已发出，服务器以状态码响应
+          const statusCode = error.response.status;
+          const message = error.response.data.detail || '未知错误';
+
+          if (statusCode === 400) {
+            alert('登录失败：' + message);
+          } else if (statusCode === 402) {
+            alert(message);
+            await router.push('/register');
+          } else {
+            // 处理其他可能的错误状态码
+            alert('错误：' + message);
+          }
+        } else if (error.request) {
+          // 请求已发出，但没有收到响应
+          console.error('无响应：', error.request);
+          alert('登录请求失败，请检查网络连接！');
+        } else {
+          // 在设置请求时发生了一些事情，触发了一个错误
+          console.error('请求错误：', error.message);
+          alert('登录请求失败：' + error.message);
+        }
       }
-    } else {
-      alert('请填写正确的信息！');
     }
   });
 };
