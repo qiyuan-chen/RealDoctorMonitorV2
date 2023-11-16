@@ -10,7 +10,7 @@
           <el-input type="password" v-model="loginForm.password" autocomplete="off" style="width: 80%"/>
         </el-form-item>
         <p>
-          初次登录请使用服务器上的用户名，密码是abc123
+          NOTE: 初次登录请使用服务器上的用户名，会自动跳转注册
         </p>
         <el-form-item class="bottom-group">
           <el-button type="success" @click="handleLogin" style="width: 100px">登录</el-button>
@@ -58,7 +58,7 @@ const rules = ref({
   ]
 });
 
-
+// TODO: 使用vuex传入用户名
 const handleLogin = () => {
   loginFormRef.value.validate(async (valid) => {
     if (valid) {

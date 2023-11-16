@@ -23,11 +23,11 @@ def get_db():
 async def login(user: UserLogin, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.username == user.username).first()
     if not db_user:
-        raise HTTPException(status_code=400, detail="用户不存在！")
+        raise HTTPException(status_code=400, detail="用户不存在！请联系管理员添加")
+    if db_user.role is None:
+        raise HTTPException(status_code=402, detail="首次登录，请修改密码和邮箱！")
     if not verify_password(user.password, db_user.hashed_password):
         raise HTTPException(status_code=400, detail="密码错误！")
-    if db_user.role == "init":
-        raise HTTPException(status_code=402, detail="首次登录，请修改密码和邮箱！")
 
     return db_user
 
