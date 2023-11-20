@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from ..db.database import SessionLocal
 from ..db.models import User
 from ..schemas.user import UserCreate, UserOut, UserLogin
-from ..utils import verify_password, get_password_hash
+from server.utils.utils import verify_password, get_password_hash
 
 router = APIRouter()
 
