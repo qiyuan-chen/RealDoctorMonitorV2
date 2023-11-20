@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # 此处的driver要使用pymysql，之前的aiomysql会报错
-DATABASE_URL = "mysql+pymysql://root:cqy20011012@localhost/RealDoctorMonitor"
+DATABASE_URL = "mysql+pymysql://qychen:011012@localhost/RealDoctorMonitor"
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

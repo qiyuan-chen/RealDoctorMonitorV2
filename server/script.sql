@@ -16,4 +16,4 @@ create table Users
 USE
 RealDoctorMonitor;
 INSERT INTO Users (username, email, role, hashed_password)
-VALUES ('root', '', 'root', '$2b$12$4IP4M8dAIdQkCTUPfRKAJ.2uoCuMXKc4vfGEXzM/Jx89cBzpumLk6');
+VALUES ('root', 'chenqiyuan1012@foxmail.com', 'root', '$2b$12$4IP4M8dAIdQkCTUPfRKAJ.2uoCuMXKc4vfGEXzM/Jx89cBzpumLk6');
