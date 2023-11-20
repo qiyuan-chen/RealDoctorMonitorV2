@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="/home/qychen/anaconda3" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="flask" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="web" project-jdk-type="Python SDK" />
 </project>
