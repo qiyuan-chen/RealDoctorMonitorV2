@@ -2,3 +2,8 @@ fastapi
 passlib
 sqlalchemy
 pydantic
+databases
+uvicorn
+pymysql
+aiomysql
+pydantic[email]
