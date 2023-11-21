@@ -1,6 +1,9 @@
 CREATE
 DATABASE RealDoctorMonitor;
 
+USE
+RealDoctorMonitor;
+
 create table Users
 (
     id              int auto_increment comment '自动创建的用户id'
