@@ -1,9 +1,6 @@
 import time
-import subprocess
 import os
 
-from anyio import current_time
-from requests import get
 
 
 def get_gpu_usage_info():
@@ -65,8 +62,3 @@ def get_every_gpu_usage(result):
             
     return gpu_usage_result
         
-result = get_gpu_usage_info()
-every = get_every_gpu_usage(result)
-
-for item in every.items():
-    print(item)
